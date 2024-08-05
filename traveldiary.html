@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Travel Diary</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            background-color: #f8f8f8; /* Light gray background */
+            color: #333; /* Dark gray text color */
+        }
+
+        h1 {
+            color: rgb(241, 45, 78); /* Custom color for h1 */
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        hr {
+            border: 1px solid #ddd; /* Light gray border for HR */
+            margin: 20px 0;
+        }
+
+        .entry {
+            margin: 100px;
+            padding: 20px;
+            border: 1px solid #ccc; /* Border for entry boxes */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for entry boxes */
+        }
+
+        .highlight {
+            color: rgb(21, 104, 212); /* Custom color for highlighted headings */
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input, textarea, button {
+            margin-bottom: 16px;
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #d9e8eb;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        .table-container {
+            margin: 0 auto; 
+            width: fit-content;
+        }
+        
+
+        table {
+            width:100%;
+            align-items: center;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #a1cdf1;
+        }
+
+        img {
+            max-width: 100%;
+            height: 50;
+            width: 50;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        video {
+            max-width: 100%;
+            height: 200;
+            height: 200;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        a {
+            color: #0066cc; /* Link color */
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+        
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        
+        .popup-content {
+            margin-bottom: 20px;
+        }
+        
+        .close-button {
+            display: block;
+            margin-left: auto;
+            cursor: pointer;
+            color: #888;
+        }
+        
+        .close-button:hover {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<h1>My Travel Diary</h1>
+
+<div class="entry">
+    <h2 class="highlight">Share Your Travel Experience</h2>
+    <form action="/submit" method="post">
+        <label for="travelDate">Travel Date:</label>
+        <input type="date" id="travelDate" name="travelDate" required>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required>
+
+        <label for="highlights">Highlights:</label>
+        <textarea id="highlights" name="highlights" rows="4" required></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<div class="table-container">
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Highlights</th>
+            <th>Action</th> <!-- New column for view button -->
+        </tr>
+        <tr>
+            <td>2023-07-15</td>
+            <td>New City</td>
+            <td>City Exploration</td>
+            <td><button onclick="openPopup(1)">View Highlights</button></td> <!-- Button to open the popup -->
+        </tr>
+        <tr>
+            <td>2023-07-16</td>
+            <td>Beach</td>
+            <td>Relaxing by the Beach</td>
+            <td><button onclick="openPopup(2)">View Highlights</button></td> <!-- Button to open the popup -->
+        </tr>
+    </table>
+</div>
+
+<div class="popup-overlay" onclick="closePopup()"></div>
+
+<div id="popup1" class="popup">
+    <h2 class="highlight">Day 1: Exploring a New City</h2>
+    <p>Today, I arrived in a new city and started exploring its vibrant streets. The architecture is amazing,
+        and the people are friendly.</p>
+    <img src="img1.jpg" alt="City Exploration" width="200" height="200">
+    <video width="200" height="200" controls>
+        <source src="paris_city.mp4" type="video/mp4">
+    </video>
+    <br>
+    <a href="https://www.france.fr/en/paris">more...</a>
+    <div class="popup-content">
+        <h2>2023-07-15</h2>
+        <p><strong>Location:</strong> New City</p>
+        <p><strong>Highlights:</strong> City Exploration</p>
+    </div>
+    <a href="#" class="close-button" onclick="closePopup()">Close</a> <!-- Close button to close the popup -->
+</div>
+
+<div id="popup2" class="popup">
+    <h2 class="highlight">Day 2: Visiting Eiffel Tower</h2>
+    <p>Spent a relaxing day in the Eiffel Tower, enjoying the sun and the sound of the people. The view is breathtaking!</p>
+    <img src="img2.jpg" alt="Beach Day" width="200" height="200">
+    <video width="200" height="200" controls>
+        <source src="eiffel_tower.mp4" type="video/mp4">
+    </video>
+    <br>
+    <a href="">more...</a>
+    <div class="popup-content">
+        <h2>2023-07-16</h2>
+        <p><strong>Location:</strong> Beach</p>
+        <p><strong>Highlights:</strong> Relaxing by the Beach</p>
+    </div>
+    <a href="#" class="close-button" onclick="closePopup()">Close</a> <!-- Close button to close the popup -->
+</div>
+
+<hr>
+
+<script>
+    // JavaScript function to open the popup
+    function openPopup(entryId) {
+        var popup = document.getElementById("popup" + entryId);
+        var overlay = document.querySelector(".popup-overlay");
+        popup.style.display = "block";
+        overlay.style.display = "block";
+    }
+    
+    // JavaScript function to close the popup
+    function closePopup() {
+        var popups = document.querySelectorAll(".popup");
+        var overlay = document.querySelector(".popup-overlay");
+        popups.forEach(function(popup) {
+            popup.style.display = "none";
+        });
+        overlay.style.display = "none";
+    }
+</script>
+
+</body>
+</html>
